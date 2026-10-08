@@ -1,0 +1,150 @@
+/* Injected into Google Meet */
+#mp-overlay-container {
+  position: fixed;
+  top: 20px;
+  right: -400px;
+  width: 360px;
+  max-height: 85vh;
+  background-color: #0f111a;
+  color: #f8fafc;
+  border: 1px solid #2a2f42;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  z-index: 999999;
+  font-family: 'Inter', sans-serif;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#mp-overlay-container.mp-visible {
+  right: 20px;
+}
+
+.mp-header {
+  padding: 16px;
+  border-bottom: 1px solid #2a2f42;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #161925;
+}
+
+.mp-title {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.mp-title-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #6366f1;
+  border-radius: 50%;
+}
+
+.mp-close-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.mp-close-btn:hover {
+  color: #f8fafc;
+}
+
+.mp-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.mp-checklist-item {
+  margin-bottom: 16px;
+  background-color: #1e2230;
+  border: 1px solid #2a2f42;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.mp-checklist-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mp-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.mp-item-text {
+  font-size: 14px;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.mp-comments {
+  margin-top: 12px;
+  padding-left: 30px;
+}
+
+.mp-comment {
+  font-size: 12px;
+  color: #94a3b8;
+  background-color: #0f111a;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border-left: 2px solid #6366f1;
+}
+
+.mp-comment-input {
+  width: 100%;
+  background-color: #0f111a;
+  border: 1px solid #2a2f42;
+  color: #f8fafc;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  margin-top: 8px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.mp-comment-input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.mp-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #2a2f42;
+  background-color: #161925;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mp-btn-save {
+  background-color: #f8fafc;
+  color: #0f111a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.mp-btn-save:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,51 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: meetingpilot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: meetingpilot-backend
+    ports:
+      - "8000:8000"
+    # Ensure you copy .env.example to .env in apps/backend before running
+    env_file:
+      - ./apps/backend/.env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./apps/backend:/app
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend/clarity-first-tool
+      dockerfile: Dockerfile
+    container_name: meetingpilot-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # Browser hits this directly, so it must be localhost, not the container name
+      - VITE_API_BASE_URL=http://localhost:8000
+    volumes:
+      - ./frontend/clarity-first-tool:/app
+      - /app/node_modules # Avoid overriding node_modules with host folder
+    restart: unless-stopped
+
+volumes:
+  redis_data:

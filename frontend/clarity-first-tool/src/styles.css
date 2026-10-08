@@ -1,0 +1,219 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * MeetingPilot design tokens — "case file / briefing desk".
+ * Colors are named after their role, not their appearance.
+ * Do NOT use raw hex in components. Reference via Tailwind utilities
+ * (bg-paper, text-ink, border-signal, etc.) or CSS var(--...).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Brand palette (case-file system) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-signal: var(--signal);
+  --color-slate: var(--slate);
+  --color-alert: var(--alert);
+  --color-success: var(--success);
+  --color-rule: var(--rule);
+  --color-muted-ink: var(--muted-ink);
+  --color-paper-elevated: var(--paper-elevated);
+
+  /* shadcn semantic → mapped onto brand */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  --radius: 0.375rem;
+
+  /* Brand palette — exact values from the brief */
+  --ink: #14171f;
+  --paper: #f7f6f2;
+  --paper-elevated: #ffffff;
+  --signal: #d9a441;
+  --slate: #3b5169;
+  --alert: #c1443c;
+  --success: #4c7a5e;
+  --rule: #e2e0d8; /* hairline card border on paper */
+  --muted-ink: #5c6270;
+
+  /* shadcn semantic (light) → brand */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-elevated);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-elevated);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: #eeece4;
+  --secondary-foreground: var(--ink);
+  --muted: #eeece4;
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--signal);
+  --accent-foreground: var(--ink);
+  --destructive: var(--alert);
+  --destructive-foreground: #ffffff;
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--slate);
+
+  --chart-1: var(--signal);
+  --chart-2: var(--slate);
+  --chart-3: var(--success);
+  --chart-4: var(--alert);
+  --chart-5: var(--muted-ink);
+
+  --sidebar: #f1efe8;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: #e5e2d8;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--slate);
+}
+
+.dark {
+  --paper: #14171f;
+  --paper-elevated: #1c202b;
+  --ink: #f2f1ec;
+  --rule: #2a2f3c;
+  --muted-ink: #9aa0ad;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-elevated);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-elevated);
+  --popover-foreground: var(--ink);
+  --primary: var(--signal);
+  --primary-foreground: #1a1200;
+  --secondary: #242938;
+  --secondary-foreground: var(--ink);
+  --muted: #242938;
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--signal);
+  --accent-foreground: #1a1200;
+  --destructive: var(--alert);
+  --destructive-foreground: #ffffff;
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--signal);
+
+  --sidebar: #171b25;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--signal);
+  --sidebar-primary-foreground: #1a1200;
+  --sidebar-accent: #242938;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--signal);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  code, kbd, samp, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+  :focus-visible {
+    outline: 2px solid var(--slate);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Utility: subtle case-file hairline separator */
+@utility rule-line {
+  height: 1px;
+  background: var(--rule);
+  width: 100%;
+}
+
+/* Timeline node pulse for "in-progress" state — respects reduced motion */
+@keyframes mp-node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--slate) 45%, transparent); }
+  50%      { box-shadow: 0 0 0 6px color-mix(in oklab, var(--slate) 0%, transparent); }
+}
+.mp-node-pulse {
+  animation: mp-node-pulse 1.6s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mp-node-pulse { animation: none; }
+}
+
+/* Sequenced reveal for workflow timeline entries */
+@keyframes mp-node-reveal {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mp-reveal {
+  animation: mp-node-reveal 380ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mp-reveal { animation: none; }
+}

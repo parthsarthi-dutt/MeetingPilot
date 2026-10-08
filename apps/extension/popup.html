@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetingPilot</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo"></div>
+      <h1 class="title">MeetingPilot</h1>
+    </div>
+    
+    <!-- State 1: Disconnected -->
+    <div id="view-disconnected" class="view hidden">
+      <div class="status-card">
+        <div class="status-label">Authentication Status</div>
+        <div class="status-value disconnected">Disconnected</div>
+      </div>
+      <div class="instructions">
+        <p>To authenticate, please open the MeetingPilot dashboard. The extension will automatically sync your session.</p>
+        <button id="open-dashboard-btn" class="btn">Open Dashboard</button>
+      </div>
+    </div>
+
+    <!-- State 2: Active Meeting (Checklist Editor) -->
+    <div id="view-active-meet" class="view hidden">
+      <div class="active-badge">
+        <div class="pulse-dot"></div>
+        <span>Active Meeting</span>
+      </div>
+      <h2 id="active-meet-title" class="meet-title">Loading...</h2>
+      
+      <div id="checklist-container" class="checklist-container">
+        <!-- JS injects checklist items here -->
+      </div>
+      
+      <button id="save-checklist-btn" class="btn btn-primary" style="margin-top: 15px;">Save Changes</button>
+      <div id="save-status" class="save-status"></div>
+    </div>
+
+    <!-- State 3: Upcoming Meetings -->
+    <div id="view-upcoming" class="view hidden">
+      <div class="status-card">
+        <div class="status-label">Authentication Status</div>
+        <div class="status-value connected">Connected</div>
+      </div>
+      <h3 class="section-title">Upcoming Meetings</h3>
+      <div id="upcoming-list" class="upcoming-list">
+        <!-- JS injects list here -->
+        <div class="loading-text">Loading schedule...</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      MeetingPilot Extension v1.0
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

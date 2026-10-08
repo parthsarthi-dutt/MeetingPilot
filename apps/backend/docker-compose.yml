@@ -1,0 +1,45 @@
+# =============================================================================
+# MeetingPilot Backend — Docker Compose
+# Spins up: backend API + worker (single container) + Redis
+# NeonDB (Postgres+pgvector) is external (managed) — connection string in .env
+# =============================================================================
+
+version: "3.9"
+
+services:
+  # ─── Redis ────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: meetingpilot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ─── Backend API + Worker ─────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: meetingpilot-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/app  # Hot-reload in dev
+    restart: unless-stopped
+
+volumes:
+  redis_data:

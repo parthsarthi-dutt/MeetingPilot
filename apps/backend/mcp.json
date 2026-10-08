@@ -1,0 +1,83 @@
+{
+  "mcpServers": {
+    "osint-research": {
+      "command": "python",
+      "args": ["-m", "app.mcp.osint_server"],
+      "description": "OSINT Research Server — multi-source intelligence for meeting attendee research",
+      "env": {
+        "JINA_API_KEY": "${JINA_API_KEY}",
+        "HUNTER_API_KEY": "${HUNTER_API_KEY}",
+        "LINKDAPI_KEY": "${LINKDAPI_KEY}",
+        "APIFY_TOKEN": "${APIFY_TOKEN}",
+        "DATABASE_URL": "${DATABASE_URL}"
+      },
+      "tools": [
+        {
+          "name": "research_person",
+          "description": "Full OSINT pipeline for a person — LinkedIn, web, company, email, news"
+        },
+        {
+          "name": "check_credits",
+          "description": "Check remaining OSINT credits for a user"
+        },
+        {
+          "name": "get_cached_research",
+          "description": "Retrieve cached research without running pipeline"
+        }
+      ],
+      "resources": [
+        "osint://credits/{user_id}",
+        "osint://person/{user_id}/{person_key}"
+      ]
+    },
+    "google-workspace": {
+      "command": "python",
+      "args": ["-m", "app.mcp.google_workspace"],
+      "description": "Google Workspace Server — Gmail, Calendar, Drive, Sheets via user OAuth",
+      "env": {
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}",
+        "GOOGLE_USER_ACCESS_TOKEN": "",
+        "GOOGLE_USER_REFRESH_TOKEN": ""
+      },
+      "tools": [
+        {
+          "name": "gmail_search",
+          "description": "Search Gmail messages"
+        },
+        {
+          "name": "gmail_send",
+          "description": "Send email via Gmail"
+        },
+        {
+          "name": "calendar_create_event",
+          "description": "Create a Google Calendar event"
+        },
+        {
+          "name": "calendar_cancel_event",
+          "description": "Cancel a Google Calendar event"
+        },
+        {
+          "name": "calendar_watch",
+          "description": "Register push notification webhook"
+        },
+        {
+          "name": "drive_search",
+          "description": "Search Google Drive files"
+        },
+        {
+          "name": "drive_get_file_content",
+          "description": "Read file content from Google Drive"
+        },
+        {
+          "name": "sheets_search",
+          "description": "Search and read Google Sheets"
+        }
+      ],
+      "resources": [
+        "google://user/profile",
+        "google://calendar/upcoming"
+      ]
+    }
+  }
+}

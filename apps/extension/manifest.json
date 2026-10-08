@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "MeetingPilot Extension",
+  "version": "1.0",
+  "description": "Brings the MeetingPilot checklist overlay directly into Google Meet.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://meet.google.com/*",
+    "http://localhost:5173/*",
+    "http://localhost:8000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MeetingPilot"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://meet.google.com/*"],
+      "css": ["content.css"],
+      "js": ["meet_content.js"]
+    },
+    {
+      "matches": ["http://localhost:5173/*", "http://127.0.0.1:5173/*", "http://localhost:3000/*", "http://127.0.0.1:3000/*", "https://*.meetingpilot.com/*"],
+      "js": ["auth_content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
